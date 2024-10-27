@@ -18,7 +18,7 @@ jp_en = {'ぬ': '1', 'ふ': '2', 'あ': '3', 'う': '4', 'え': '5', 'お': '6',
          'ろ': '"', '「': '+', 'ー': '}'
 }
 
-class Japan_Convert:
+class Japan_Converter:
     def __init__(self):
         self.tagger = fugashi.Tagger()
 
@@ -74,8 +74,8 @@ class Japan_Convert:
             target = self.combine_diacritics(target)
         return target
 
-''' [DEBUG] '''
-# converter = Japan_Convert()
+''' [TEST] '''
+# converter = Japan_Converter()
 # text = '意味のない部分を、他のパッケージや方法を使って意味のある現象として表現してください。'
 # en_output = converter.convert(text, jp_en)
 # print(en_output)
@@ -83,4 +83,4 @@ class Japan_Convert:
 # print(jp_output)
 # print('=================')
 # print(text)
-''' [DEBUG] '''
+''' [TEST] '''
