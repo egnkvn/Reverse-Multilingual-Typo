@@ -53,13 +53,13 @@ class Thai_Converter:
 
 ''' [TEST] '''
 # converter = Thai_Converter()
-# english_input = 'l;ylfu6iy['
+# english_input = ';yoouhvkdkLfu,kd'
 # thai_output = converter.convert(english_input, en_th)
 # print(f"English Input: {english_input}")
 # print(f"Thai Output: {thai_output}")
 
 # # Convert Thai text to English key inputs
-# thai_input = 'สวัสดีครับ'
+# thai_input = 'วันนี้อากาศดีมาก'
 # english_output = converter.convert(thai_input, th_en)
 # print(f"Thai Input: {thai_input}")
 # print(f"English Output: {english_output}")
