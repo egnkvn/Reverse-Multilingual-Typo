@@ -70,7 +70,7 @@ class Japan_Converter:
 
 ''' [TEST] '''
 # converter = Japan_Converter()
-# text = '意味のない部分を、他のパッケージや方法を使って意味のある現象として表現してください。'
+# text = '意味のない部分を。'
 # en_output = converter.convert(text, jp_en)
 # print(en_output)
 # jp_output = converter.convert(en_output, en_jp)
