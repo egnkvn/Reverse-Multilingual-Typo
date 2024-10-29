@@ -1,5 +1,4 @@
 from pypinyin import pinyin, Style
-import unicodedata
 
 en_zhuyin = {
     '1': 'ㄅ', '2': 'ㄉ', '3': 'ˇ', '4': 'ˋ', '5': 'ㄓ', '6': 'ˊ', '7': '˙', '8': 'ㄚ', '9': 'ㄞ', '0': 'ㄢ', '-': 'ㄦ', '=': '＝',
@@ -20,6 +19,11 @@ class Zhuyin_Converter:
     def convert(self, key_input, map_dict):
         result = []
 
+        if map_dict == zhuyin_en:
+            zhuyin = [i[0] for i in pinyin(key_input, style=Style.BOPOMOFO)]
+            key_input = ''.join(zhuyin)
+            # print(pinyin(key_input, style=Style.BOPOMOFO))
+        
         for char in key_input:
             mapped_char = map_dict.get(char, char)
             result.append(mapped_char)
@@ -30,13 +34,13 @@ class Zhuyin_Converter:
 
 ''' [TEST] '''
 # converter = Zhuyin_Converter()
-# english_input = 'rup wu0 yl3g;4t xk7u j03au04>'
-# zhuyin_output = converter.convert(english_input, en_zhuyin)
-# print(f"英文输入: {english_input}")
-# print(f"注音输出: {zhuyin_output}")
 
-# zhuyin_input = 'ㄏㄜˊㄨㄛˇ'
+# zhuyin_input = '這好爛喔'
 # english_output = converter.convert(zhuyin_input, zhuyin_en)
 # print(f"注音输入: {zhuyin_input}")
 # print(f"英文输出: {english_output}")
+
+# zhuyin_output = converter.convert(english_output, en_zhuyin)
+# print(f"英文输入: {english_output}")
+# print(f"注音输出: {zhuyin_output}")
 ''' [TEST] '''
