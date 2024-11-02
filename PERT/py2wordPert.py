@@ -415,7 +415,8 @@ def main():
         phrase2CharPath = args.phrase2CharPath, 
         bigramModelPath = args.bigramModelPath, 
         modelPath = args.modelPath)
-    pinyinList = ['zhong', 'guo', 'gong', 'cheng', 'yuan', 'yuan', 'shi', 'zhong', 'nan', 'shan', 'jiu', 'jin', 'qi', 'de', 'xiang', 'gang', 'yi', 'qing', 'fa', 'zhan', 'ji', 'fang', 'kong', 'cuo', 'shi', 'deng', 'wen', 'ti', 'hui', 'da', 'ji', 'zhe', 'ti', 'wen', 'shi']
+    # pinyinList = ['zhong', 'guo', 'gong', 'cheng', 'yuan', 'yuan', 'shi', 'zhong', 'nan', 'shan', 'jiu', 'jin', 'qi', 'de', 'xiang', 'gang', 'yi', 'qing', 'fa', 'zhan', 'ji', 'fang', 'kong', 'cuo', 'shi', 'deng', 'wen', 'ti', 'hui', 'da', 'ji', 'zhe', 'ti', 'wen', 'shi']
+    pinyinList = ['su3', 'cl3']
     charList = thePy2WordPERT.ConvertPinyinListToCharList(pinyinList)
     print(charList)
     Evaluation(thePy2Char = thePy2WordPERT, 
