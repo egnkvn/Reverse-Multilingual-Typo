@@ -1,20 +1,21 @@
-en_ko = {
-    '`': '₩',
-    'q': 'ㅂ', 'w': 'ㅈ', 'e': 'ㄷ', 'r': 'ㄱ', 't': 'ㅅ', 'y': 'ㅛ',
-    'u': 'ㅕ', 'i': 'ㅑ', 'o': 'ㅐ', 'p': 'ㅔ',
-    'a': 'ㅁ', 's': 'ㄴ', 'd': 'ㅇ', 'f': 'ㄹ', 'g': 'ㅎ', 'h': 'ㅗ',
-    'j': 'ㅓ', 'k': 'ㅏ', 'l': 'ㅣ',
-    'z': 'ㅋ', 'x': 'ㅌ', 'c': 'ㅊ', 'v': 'ㅍ', 'b': 'ㅠ', 'n': 'ㅜ',
-    'm': 'ㅡ',
-    # Shift
-    'Q': 'ㅃ', 'W': 'ㅉ', 'E': 'ㄸ', 'R': 'ㄲ', 'T': 'ㅆ',
-    'O': 'ㅒ', 'P': 'ㅖ'
-}
-
-ko_en = {value: key for key, value in en_ko.items()}
-
 class Korean_Converter:
     def __init__(self):
+
+        self.en_ko = {
+            '`': '₩',
+            'q': 'ㅂ', 'w': 'ㅈ', 'e': 'ㄷ', 'r': 'ㄱ', 't': 'ㅅ', 'y': 'ㅛ',
+            'u': 'ㅕ', 'i': 'ㅑ', 'o': 'ㅐ', 'p': 'ㅔ',
+            'a': 'ㅁ', 's': 'ㄴ', 'd': 'ㅇ', 'f': 'ㄹ', 'g': 'ㅎ', 'h': 'ㅗ',
+            'j': 'ㅓ', 'k': 'ㅏ', 'l': 'ㅣ',
+            'z': 'ㅋ', 'x': 'ㅌ', 'c': 'ㅊ', 'v': 'ㅍ', 'b': 'ㅠ', 'n': 'ㅜ',
+            'm': 'ㅡ',
+            # Shift
+            'Q': 'ㅃ', 'W': 'ㅉ', 'E': 'ㄸ', 'R': 'ㄲ', 'T': 'ㅆ',
+            'O': 'ㅒ', 'P': 'ㅖ'
+        }
+
+        self.ko_en = {value: key for key, value in self.en_ko.items()}
+
         self.initial_list = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ',
                              'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ',
                              'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
@@ -148,12 +149,18 @@ class Korean_Converter:
         return jamo_list
 
     def convert(self, key_input, map_dict):
-        if map_dict == en_ko:
-            mapped_chars = [map_dict[char] if char in map_dict else char for char in key_input]
+
+        if map_dict == "ko_en":
+            selected_dict = self.ko_en
+        elif map_dict == "en_ko":
+            selected_dict = self.en_ko
+
+        if map_dict == "en_ko":
+            mapped_chars = [selected_dict[char] if char in selected_dict else char for char in key_input]
             result = self.compose(mapped_chars)
-        elif map_dict == ko_en:
+        elif map_dict == "ko_en":
             jamo_list = self.decompose(key_input)
-            mapped_chars = [map_dict[jamo] if jamo in map_dict else jamo for jamo in jamo_list]
+            mapped_chars = [selected_dict[jamo] if jamo in selected_dict else jamo for jamo in jamo_list]
             result = ''.join(mapped_chars)
         return result
 
@@ -161,10 +168,10 @@ class Korean_Converter:
 # converter = Korean_Converter()
 # # korean_input = '웏왹서'
 # korean_input = '내일은 볶음밥 먹고싶다'
-# english_output = converter.convert(korean_input, ko_en)
+# english_output = converter.convert(korean_input, "ko_en")
 # print(f"korean_input: {korean_input}")
 # print(f"english_output: {english_output}") 
 
-# korean_output = converter.convert(english_output, en_ko)
+# korean_output = converter.convert(english_output, "en_ko")
 # print(f"korean_output: {korean_output}") 
 ''' [TEST] '''

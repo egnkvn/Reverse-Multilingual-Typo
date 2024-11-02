@@ -2999,4 +2999,4 @@ G: 用 军 法 杀 人 堂 堂 正 正 用 军 法 阴 人 古 今 中 外 惟 �
 R: 用 军 阀 杀 人 堂 堂 正 正 用 菌 发 引 人 古 今 中 外 唯 独 一 个 属 各 项 任
 Correct: 17  Total: 26 precision: 0.6538461538461539 error rate: 0.34615384615384615
 Correct in the whole file: 46526  Total in the whole file: 55447 precision: 0.8391076162822154 error rate: 0.16089238371778455
-Total time consuming: 151.54958200454712
+Total time consuming: 298.6945400238037

@@ -1,12 +1,13 @@
 
+model='cn_tiny'
 CUDA_VISIBLE_DEVICES='0' python py2wordPert.py \
-   --charLex "./Corpus/CharListFrmC4P.txt" \
-   --pyLex "./Corpus/pinyinList.txt" \
-   --pinyin2PhrasePath "./Corpus/ModernChineseLexicon4PinyinMapping.txt" \
-   --bigramModelPath "./Models/Bigram/Bigram_CharListFrmC4P.json" \
-   --modelPath "./Models/test/" \
-   --charFile "./Corpus/train_texts_CharSeg_1k.txt" \
-   --pinyinFile "./Corpus/train_texts_pinyin_1k.txt" \
-   --conversionRsltFile "./result/conversionRslt.txt" \
-   --logFile "./result/logFile.txt"
+   --charLex "./Corpus/cn/CharListFrmC4P.txt" \
+   --pyLex "./Corpus/cn/pinyinList.txt" \
+   --pinyin2PhrasePath "./Corpus/cn/ModernChineseLexicon4PinyinMapping.txt" \
+   --bigramModelPath "./Models/Bigram/Bigram_cn.json" \
+   --modelPath "./Models/$model" \
+   --charFile "./Corpus/cn/train_texts_CharSeg_1k.txt" \
+   --pinyinFile "./Corpus/cn/train_texts_pinyin_1k.txt" \
+   --conversionRsltFile "./result/cn_tiny_rslt.txt" \
+   --logFile "./result/cn_tiny_log.txt"
 

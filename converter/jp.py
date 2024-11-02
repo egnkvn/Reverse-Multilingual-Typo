@@ -1,20 +1,21 @@
 import jaconv
 import fugashi 
 
-en_jp = {
-    '1': 'ぬ', '2': 'ふ', '3': 'あ', '4': 'う', '5': 'え', '6': 'お', '7': 'や', '8': 'ゆ', '9': 'よ', '0': 'わ', '-': 'ほ', '=': '゜',
-    'q': 'た', 'w': 'て', 'e': 'い', 'r': 'す', 't': 'か', 'y': 'ん', 'u': 'な', 'i': 'に', 'o': 'ら', 'p': 'せ', '[': '゛', ']': 'む', '\\': 'へ',
-    'a': 'ち', 's': 'と', 'd': 'し', 'f': 'は', 'g': 'き', 'h': 'く', 'j': 'ま', 'k': 'の', 'l': 'り', ';': 'れ', "'": 'け',
-    'z': 'つ', 'x': 'さ', 'c': 'そ', 'v': 'ひ', 'b': 'こ', 'n': 'み', 'm': 'も', ',': 'ね', '.': 'る', '/': 'め',
-    # Shift
-    '#': 'ぁ', 'E': 'ぃ', '$': 'ぅ', '%': 'ぇ', '^': 'ぉ', '&': 'ゃ', '*': 'ゅ', '(': 'ょ', 
-    'Z': 'っ', ')': 'を', '<': '、','>': '。','?': '・','{': '」','"': 'ろ','+': '「','}': 'ー',
-}
-jp_en = {value: key for key, value in en_jp.items()}
+
 
 class Japan_Converter:
     def __init__(self):
         self.tagger = fugashi.Tagger()
+        self.en_jp = {
+            '1': 'ぬ', '2': 'ふ', '3': 'あ', '4': 'う', '5': 'え', '6': 'お', '7': 'や', '8': 'ゆ', '9': 'よ', '0': 'わ', '-': 'ほ', '=': '゜',
+            'q': 'た', 'w': 'て', 'e': 'い', 'r': 'す', 't': 'か', 'y': 'ん', 'u': 'な', 'i': 'に', 'o': 'ら', 'p': 'せ', '[': '゛', ']': 'む', '\\': 'へ',
+            'a': 'ち', 's': 'と', 'd': 'し', 'f': 'は', 'g': 'き', 'h': 'く', 'j': 'ま', 'k': 'の', 'l': 'り', ';': 'れ', "'": 'け',
+            'z': 'つ', 'x': 'さ', 'c': 'そ', 'v': 'ひ', 'b': 'こ', 'n': 'み', 'm': 'も', ',': 'ね', '.': 'る', '/': 'め',
+            # Shift
+            '#': 'ぁ', 'E': 'ぃ', '$': 'ぅ', '%': 'ぇ', '^': 'ぉ', '&': 'ゃ', '*': 'ゅ', '(': 'ょ', 
+            'Z': 'っ', ')': 'を', '<': '、','>': '。','?': '・','{': '」','"': 'ろ','+': '「','}': 'ー',
+        }
+        self.jp_en = {value: key for key, value in self.en_jp.items()}
 
     def decompose_diacritics(self, text):
         result = []
@@ -61,19 +62,25 @@ class Japan_Converter:
         return ''.join(result)
 
     def convert(self, key_input, map_dict):
-        if map_dict == jp_en:  
+
+        if map_dict == "jp_en":
+            selected_dict = self.jp_en
+        elif map_dict == "en_jp":
+            selected_dict = self.en_jp
+
+        if map_dict == "jp_en":  
           key_input = self.Hiragana(key_input)
-        target = ''.join(map_dict[char] if char in map_dict else char for char in key_input)
-        if map_dict == en_jp:
+        target = ''.join(selected_dict[char] if char in selected_dict else char for char in key_input)
+        if map_dict == "en_jp":
             target = self.combine_diacritics(target)
         return target
 
 ''' [TEST] '''
 # converter = Japan_Converter()
 # text = '意味のない部分を。'
-# en_output = converter.convert(text, jp_en)
+# en_output = converter.convert(text, "jp_en")
 # print(en_output)
-# jp_output = converter.convert(en_output, en_jp)
+# jp_output = converter.convert(en_output, "en_jp")
 # print(jp_output)
 # print('=================')
 # print(text)
