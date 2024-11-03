@@ -61,26 +61,26 @@ class Japan_Converter:
                 result.append(word.surface)
         return ''.join(result)
 
-    def convert(self, key_input, map_dict):
+    def convert(self, key_input):
+        ''' [jp_en] '''
+        key_input = self.Hiragana(key_input)
+        target = ''.join(self.jp_en[char] if char in self.jp_en else char for char in key_input)
 
-        if map_dict == "jp_en":
-            selected_dict = self.jp_en
-        elif map_dict == "en_jp":
-            selected_dict = self.en_jp
-
-        if map_dict == "jp_en":  
-          key_input = self.Hiragana(key_input)
-        target = ''.join(selected_dict[char] if char in selected_dict else char for char in key_input)
-        if map_dict == "en_jp":
-            target = self.combine_diacritics(target)
+        return target
+    
+    def reverse_convert(self, key_input):
+        ''' [en_jp] '''
+        target = ''.join(self.en_jp[char] if char in self.en_jp else char for char in key_input)
+        target = self.combine_diacritics(target)
+    
         return target
 
 ''' [TEST] '''
 # converter = Japan_Converter()
 # text = '意味のない部分を。'
-# en_output = converter.convert(text, "jp_en")
+# en_output = converter.convert(text)
 # print(en_output)
-# jp_output = converter.convert(en_output, "en_jp")
+# jp_output = converter.reverse_convert(en_output)
 # print(jp_output)
 # print('=================')
 # print(text)

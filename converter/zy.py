@@ -14,23 +14,24 @@ class Zhuyin_Converter:
         }
         self.zhuyin_en = {value: key for key, value in self.en_zhuyin.items()}
     
-    def convert(self, key_input, map_dict):
+    def convert(self, key_input):
+        ''' [zy_en] '''
         result = []
-
-        if map_dict == "zhuyin_en":
-            selected_dict = self.zhuyin_en
-        elif map_dict == "en_zhuyin":
-            selected_dict = self.en_zhuyin
-        
-        if map_dict == "zhuyin_en":
-            zhuyin = [i[0] for i in pinyin(key_input, style=Style.BOPOMOFO)]
-            key_input = ''.join(zhuyin)
-            # print(pinyin(key_input, style=Style.BOPOMOFO))
-        
+        zhuyin = [i[0] for i in pinyin(key_input, style=Style.BOPOMOFO)]
+        key_input = ''.join(zhuyin)
         for char in key_input:
-            mapped_char = selected_dict.get(char, char)
+            mapped_char = self.zhuyin_en.get(char, char)
             result.append(mapped_char)
-        
+        target = ''.join(result)
+
+        return target
+    
+    def reverse_convert(self, key_input):
+        ''' [en_zy] '''
+        result = []
+        for char in key_input:
+            mapped_char = self.en_zhuyin.get(char, char)
+            result.append(mapped_char)
         target = ''.join(result)
 
         return target
@@ -39,11 +40,11 @@ class Zhuyin_Converter:
 # converter = Zhuyin_Converter()
 
 # zhuyin_input = '我好棒喔'
-# english_output = converter.convert(zhuyin_input, "zhuyin_en")
-# print(f"注音输入: {zhuyin_input}")
+# english_output = converter.convert(zhuyin_input)
+# print(f"中文输入: {zhuyin_input}")
 # print(f"英文输出: {english_output}")
 
-# zhuyin_output = converter.convert(english_output, "en_zhuyin")
+# zhuyin_output = converter.reverse_convert(english_output)
 # print(f"英文输入: {english_output}")
 # print(f"注音输出: {zhuyin_output}")
 ''' [TEST] '''

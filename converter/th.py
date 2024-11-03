@@ -24,42 +24,39 @@ class Thai_Converter:
         combined_text = unicodedata.normalize('NFC', text)
         return combined_text
 
-    def convert(self, key_input, map_dict):
-        
-        if map_dict == "th_en":
-            selected_dict = self.th_en
-        elif map_dict == "en_th":
-            selected_dict = self.en_th
-
-        if map_dict == "th_en":
-            key_input = self.decompose_diacritics(key_input)
-        else:
-            key_input = unicodedata.normalize('NFC', key_input)
-
+    def convert(self, key_input):
+        ''' [th_en] '''
+        key_input = self.decompose_diacritics(key_input)
         result = []
-
         for char in key_input:
-            mapped_char = selected_dict.get(char, char)
+            mapped_char = self.th_en.get(char, char)
             result.append(mapped_char)
-        
         target = ''.join(result)
+        target = unicodedata.normalize('NFC', target)
 
-        if map_dict == "en_th":
-            target = self.combine_diacritics(target)
-        else:
-            target = unicodedata.normalize('NFC', target)
+        return target
+
+    def reverse_convert(self, key_input):
+        ''' [en_th] '''
+        key_input = unicodedata.normalize('NFC', key_input)
+        result = []
+        for char in key_input:
+            mapped_char = self.en_th.get(char, char)
+            result.append(mapped_char)
+        target = ''.join(result)
+        target = self.combine_diacritics(target)
 
         return target
 
 ''' [TEST] '''
 # converter = Thai_Converter()
 # english_input = ';yoouhvkdkLfu,kd'
-# thai_output = converter.convert(english_input, "en_th")
+# thai_output = converter.reverse_convert(english_input)
 # print(f"English Input: {english_input}")
 # print(f"Thai Output: {thai_output}")
 
 # # Convert Thai text to English key inputs
-# english_output = converter.convert(thai_output, "th_en")
+# english_output = converter.convert(thai_output)
 # print(f"Thai Input: {thai_output}")
 # print(f"English Output: {english_output}")
 ''' [TEST] '''

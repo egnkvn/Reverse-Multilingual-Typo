@@ -148,30 +148,29 @@ class Korean_Converter:
                 jamo_list.append(char)
         return jamo_list
 
-    def convert(self, key_input, map_dict):
-
-        if map_dict == "ko_en":
-            selected_dict = self.ko_en
-        elif map_dict == "en_ko":
-            selected_dict = self.en_ko
-
-        if map_dict == "en_ko":
-            mapped_chars = [selected_dict[char] if char in selected_dict else char for char in key_input]
-            result = self.compose(mapped_chars)
-        elif map_dict == "ko_en":
-            jamo_list = self.decompose(key_input)
-            mapped_chars = [selected_dict[jamo] if jamo in selected_dict else jamo for jamo in jamo_list]
-            result = ''.join(mapped_chars)
+    def convert(self, key_input):
+        ''' [ko_en] '''
+        jamo_list = self.decompose(key_input)
+        mapped_chars = [self.ko_en[jamo] if jamo in self.ko_en else jamo for jamo in jamo_list]
+        result = ''.join(mapped_chars)
+        
+        return result
+    
+    def reverse_convert(self, key_input):
+        ''' [en_ko] '''
+        mapped_chars = [self.en_ko[char] if char in self.en_ko else char for char in key_input]
+        result = self.compose(mapped_chars)
+        
         return result
 
 ''' [TEST] '''
 # converter = Korean_Converter()
-# # korean_input = '웏왹서'
-# korean_input = '내일은 볶음밥 먹고싶다'
-# english_output = converter.convert(korean_input, "ko_en")
+# korean_input = '웏왹서'
+# # korean_input = '내일은 볶음밥 먹고싶다'
+# english_output = converter.convert(korean_input)
 # print(f"korean_input: {korean_input}")
 # print(f"english_output: {english_output}") 
 
-# korean_output = converter.convert(english_output, "en_ko")
+# korean_output = converter.reverse_convert(english_output)
 # print(f"korean_output: {korean_output}") 
 ''' [TEST] '''
