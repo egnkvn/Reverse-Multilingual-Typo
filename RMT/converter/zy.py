@@ -7,7 +7,7 @@ class Zhuyin_Converter:
             '1': 'ㄅ', '2': 'ㄉ', '3': 'ˇ', '4': 'ˋ', '5': 'ㄓ', '6': 'ˊ', '7': '˙', '8': 'ㄚ', '9': 'ㄞ', '0': 'ㄢ', '-': 'ㄦ', '=': '＝',
             'q': 'ㄆ', 'w': 'ㄊ', 'e': 'ㄍ', 'r': 'ㄐ', 't': 'ㄔ', 'y': 'ㄗ', 'u': 'ㄧ', 'i': 'ㄛ', 'o': 'ㄟ', 'p': 'ㄣ', '[': '「', ']': '」',
             'a': 'ㄇ', 's': 'ㄋ', 'd': 'ㄎ', 'f': 'ㄑ', 'g': 'ㄕ', 'h': 'ㄘ', 'j': 'ㄨ', 'k': 'ㄜ', 'l': 'ㄠ', ';': 'ㄤ', '\'': '‘',
-            'z': 'ㄈ', 'x': 'ㄌ', 'c': 'ㄏ', 'v': 'ㄒ', 'b': 'ㄖ', 'n': 'ㄙ', 'm': 'ㄩ', ',': 'ㄝ', '.': 'ㄡ', '/': 'ㄥ', '`': '－', '\\': '、', 
+            'z': 'ㄈ', 'x': 'ㄌ', 'c': 'ㄏ', 'v': 'ㄒ', 'b': 'ㄖ', 'n': 'ㄙ', 'm': 'ㄩ', ',': 'ㄝ', '.': 'ㄡ', '/': 'ㄥ', '`': '－', '\\': '、', ' ':' ',
             # Shift
             '~': '～', '!': '！', '@': '＠', '#': '＃', '$': '＄', '%': '％', '^': '＾', '&': '＆', '*': '＊', '(': '（', ')': '）', '_': '＿', '+': '＋',
             '{': '『', '}': '』', '|': '｜', ':': '：', '"': '“', '<': '，', '>': '。', '?': '？'
@@ -17,8 +17,15 @@ class Zhuyin_Converter:
     def convert(self, key_input):
         ''' [zy_en] '''
         result = []
-        zhuyin = [i[0] for i in pinyin(key_input, style=Style.BOPOMOFO)]
+        zhuyin = []
+        tones = [' ', 'ˊ', 'ˇ', 'ˋ', '˙']
+        for i in pinyin(key_input, style=Style.BOPOMOFO):
+            if i[0][-1] not in tones:
+                i[0] = i[0] + ' '
+            zhuyin.append(i[0])
+        # zhuyin = [i[0] for i in pinyin(key_input, style=Style.BOPOMOFO)]
         key_input = ''.join(zhuyin)
+
         for char in key_input:
             mapped_char = self.zhuyin_en.get(char, char)
             result.append(mapped_char)
