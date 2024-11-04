@@ -1,6 +1,0 @@
-README.md
-setup.py
-Reverse_Multilingual_Typo.egg-info/PKG-INFO
-Reverse_Multilingual_Typo.egg-info/SOURCES.txt
-Reverse_Multilingual_Typo.egg-info/dependency_links.txt
-Reverse_Multilingual_Typo.egg-info/top_level.txt
