@@ -11,8 +11,8 @@ def check_EM(json_file):
     target_text = item["target"]
     generated_text = item["generated"]
     
-    target_prefix = target_text.split(" [SEP]")[0].strip()
-    generated_prefix = generated_text.split(" [SEP]")[0].strip()
+    target_prefix = target_text.split("[SEP]")[0].strip()
+    generated_prefix = generated_text.split("[SEP]")[0].strip()
     
     if target_prefix == generated_prefix:
       correct += 1
@@ -36,8 +36,6 @@ def check_differences(json_file):
 
     difference_count = sum(1 for a, b in zip(target_last_word, generated_last_word) if a != b)
     difference_count += abs(len(target_last_word) - len(generated_last_word))
-    if difference_count > 0:
-      print(target_last_word, generated_last_word)
     difference += difference_count
     total += 1
   return difference / total
