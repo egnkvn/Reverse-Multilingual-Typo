@@ -171,6 +171,6 @@ class Korean_Converter:
 # print(f"korean_input: {korean_input}")
 # print(f"english_output: {english_output}") 
 
-# korean_output = converter.reverse_convert(english_output)
+# korean_output = converter.reverse_convert('su3cl3ji32k7au/6y4rul4')
 # print(f"korean_output: {korean_output}") 
 ''' [TEST] '''

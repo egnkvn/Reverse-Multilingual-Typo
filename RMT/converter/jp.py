@@ -79,9 +79,10 @@ class Japan_Converter:
 # converter = Japan_Converter()
 # text = '意味のない部分を。'
 # en_output = converter.convert(text)
-# print(en_output)
+# print(converter.H(text))
+# # print(en_output)
 # jp_output = converter.reverse_convert(en_output)
-# print(jp_output)
+# # print(jp_output)
 # print('=================')
 # print(text)
 ''' [TEST] '''
