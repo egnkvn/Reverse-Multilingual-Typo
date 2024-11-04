@@ -97,7 +97,6 @@ class Korean_Converter:
         jamo_list = self.compose_complex_jamo(jamo_list)
         syllables = []
         i = 0
-        print(jamo_list)
         while i < len(jamo_list):
             if not self.is_initial_consonant(jamo_list[i]) and not self.is_vowel(jamo_list[i]) and not self.is_final_consonant(jamo_list):
                 syllables.append(jamo_list[i])
@@ -171,6 +170,6 @@ class Korean_Converter:
 # print(f"korean_input: {korean_input}")
 # print(f"english_output: {english_output}") 
 
-# korean_output = converter.reverse_convert(english_output)
+# korean_output = converter.reverse_convert('su3cl3ji32k7au/6y4rul4')
 # print(f"korean_output: {korean_output}") 
 ''' [TEST] '''
