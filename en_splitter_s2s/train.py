@@ -80,7 +80,7 @@ scheduler = get_linear_schedule_with_warmup(
 )
 
 best_val_loss = float("inf")  
-save_directory = "trained_t5_model" 
+save_directory = "Models" 
 
 for epoch in range(num_epochs):
     model.train()

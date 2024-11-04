@@ -46,7 +46,7 @@ class TextDataset(Dataset):
         }
 
 device = torch.device("cuda:5" if torch.cuda.is_available() else "cpu")
-model_directory = "trained_t5_model/75000" 
+model_directory = "Models/75000" 
 tokenizer = T5Tokenizer.from_pretrained(model_directory)
 model = T5ForConditionalGeneration.from_pretrained(model_directory).to(device)
 
