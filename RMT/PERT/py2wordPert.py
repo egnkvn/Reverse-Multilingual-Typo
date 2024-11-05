@@ -34,8 +34,8 @@ import torch.nn
 from torch.autograd import Variable
 import torch.nn as nn
 
-from PinyinCharDataProcesser import PinyinCharDataProcesser
-from NEZHA.modeling_nezha import BertConfig, BertForTokenClassification
+from RMT.PERT.PinyinCharDataProcesser import PinyinCharDataProcesser
+from RMT.PERT.NEZHA.modeling_nezha import BertConfig, BertForTokenClassification
 
 log_format = '%(asctime)-10s: %(message)s'
 logging.basicConfig(level=logging.INFO, format=log_format)
@@ -153,8 +153,9 @@ class Py2WordPERT(object):
         self.bert_config = BertConfig.from_json_file(os.path.join(modelPath,'model_config.json'))
         self.model = BertForTokenClassification(config=self.bert_config, num_labels=self.bert_config.num_labels)
         self.device = torch.device('cuda' if torch.cuda.is_available() else "cpu")
-        self.model.load_state_dict(torch.load(os.path.join(modelPath,'model.pt'), map_location=self.device))
-        self.model.to(self.device)
+        # self.model.load_state_dict(torch.load(os.path.join(modelPath,'model.pt')))
+        self.model.load_state_dict(torch.load(os.path.join(modelPath,'model.pt'), map_location='cpu', weights_only=True))
+        # self.model.to(self.device)
         self.model.eval()
         pass
 

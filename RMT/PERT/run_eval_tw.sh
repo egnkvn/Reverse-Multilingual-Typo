@@ -5,7 +5,7 @@ CUDA_VISIBLE_DEVICES='0' python py2wordPert.py \
    --pyLex "./Corpus/tw/zhuyinList.txt" \
    --pinyin2PhrasePath "./Corpus/tw/ModernChineseLexicon4ZhuyinMapping.txt" \
    --bigramModelPath "./Models/Bigram/Bigram_cn.json" \
-   --modelPath "./Models/$model" \
+   --modelPath "/data2/enginekevin/Reverse-Multilingual-Typo/RMT/PERT/Models/$model" \
    --charFile "./Corpus/cn/train_texts_CharSeg_1k.txt" \
    --pinyinFile "./Corpus/tw/train_texts_zhuyin_1k.txt" \
    --conversionRsltFile "./result/tw_tiny_rslt.txt" \

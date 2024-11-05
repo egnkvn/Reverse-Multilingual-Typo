@@ -97,40 +97,43 @@ class Korean_Converter:
         jamo_list = self.compose_complex_jamo(jamo_list)
         syllables = []
         i = 0
-        while i < len(jamo_list):
-            if not self.is_initial_consonant(jamo_list[i]) and not self.is_vowel(jamo_list[i]) and not self.is_final_consonant(jamo_list):
-                syllables.append(jamo_list[i])
-                i += 1
-            initial = ''
-            vowel = ''
-            final = ''
-            if i < len(jamo_list) and self.is_initial_consonant(jamo_list[i]):
-                initial = jamo_list[i]
-                i += 1
-            if i < len(jamo_list) and self.is_vowel(jamo_list[i]):
-                vowel = jamo_list[i]
-                i += 1
-            
-            if i < len(jamo_list) and self.is_final_consonant(jamo_list[i]):
-                possible_final = jamo_list[i]
-                i += 1
-                # Check next jamo whether vowel
-                if self.is_vowel(jamo_list[i]):
-                    if possible_final in self.double_jamos.values():
-                        i -= 1
-                        jamo_list.pop(i)
-                        jamo_list.insert(i, self.double_jamos_rev[possible_final][1])
-                        final = self.double_jamos_rev[possible_final][0]
+        try:
+            while i < len(jamo_list):
+                if not self.is_initial_consonant(jamo_list[i]) and not self.is_vowel(jamo_list[i]) and not self.is_final_consonant(jamo_list):
+                    syllables.append(jamo_list[i])
+                    i += 1
+                initial = ''
+                vowel = ''
+                final = ''
+                if i < len(jamo_list) and self.is_initial_consonant(jamo_list[i]):
+                    initial = jamo_list[i]
+                    i += 1
+                if i < len(jamo_list) and self.is_vowel(jamo_list[i]):
+                    vowel = jamo_list[i]
+                    i += 1
+                
+                if i < len(jamo_list) and self.is_final_consonant(jamo_list[i]):
+                    possible_final = jamo_list[i]
+                    i += 1
+                    # Check next jamo whether vowel
+                    if self.is_vowel(jamo_list[i]):
+                        if possible_final in self.double_jamos.values():
+                            i -= 1
+                            jamo_list.pop(i)
+                            jamo_list.insert(i, self.double_jamos_rev[possible_final][1])
+                            final = self.double_jamos_rev[possible_final][0]
+                        else:
+                            i -= 1
                     else:
-                        i -= 1
-                else:
-                    final = possible_final
+                        final = possible_final
 
-            syllable = self.compose_syllable(initial, vowel, final)
-            syllables.append(syllable)
+                syllable = self.compose_syllable(initial, vowel, final)
+                syllables.append(syllable)
 
-        return ''.join(syllables)
-
+            return ''.join(syllables)
+        except:
+            
+            return ''.join(syllables)
     def decompose(self, syllable_str):
         jamo_list = []
         for char in syllable_str:
