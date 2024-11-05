@@ -18,7 +18,7 @@
 # Take PERT as the emission probability and ngram (bigram) as transition 
 # probability, and unify them into Markov framework.
 
-
+import re
 import os
 import argparse
 import time
@@ -416,14 +416,26 @@ def main():
         bigramModelPath = args.bigramModelPath, 
         modelPath = args.modelPath)
     # pinyinList = ['zhong', 'guo', 'gong', 'cheng', 'yuan', 'yuan', 'shi', 'zhong', 'nan', 'shan', 'jiu', 'jin', 'qi', 'de', 'xiang', 'gang', 'yi', 'qing', 'fa', 'zhan', 'ji', 'fang', 'kong', 'cuo', 'shi', 'deng', 'wen', 'ti', 'hui', 'da', 'ji', 'zhe', 'ti', 'wen', 'shi']
-    pinyinList = ['su3', 'cl3']
+    pinyinList = ['2.', 'dk3', 'u3']
+    # pinyinList = ['you', 'bu', 'fen', 'yuan', 'yin', 'shi', 'yin', 'wei']
     charList = thePy2WordPERT.ConvertPinyinListToCharList(pinyinList)
     print(charList)
-    Evaluation(thePy2Char = thePy2WordPERT, 
-        pinyinFile = args.pinyinFile, 
-        rsltCharFileIn = args.conversionRsltFile,
-        goldenCharFileIn = args.charFile,
-        logFileOut = args.logFile)
+
+    with open('/data2/enginekevin/tw.json', 'r') as file:
+        test_data = json.load(file)
+
+    for data in tqdm(test_data):
+        segments = re.findall(r'.+?[3467 ]', data['input'])
+        segments = [s.strip() for s in segments]
+        charList = thePy2WordPERT.ConvertPinyinListToCharList(segments)
+        data["predict"] = "".join(charList)
+    with open('result/tw_predict.json', 'w', encoding='utf-8') as file:
+        json.dump(test_data, file, ensure_ascii=False, indent=2)
+    # Evaluation(thePy2Char = thePy2WordPERT, 
+    #     pinyinFile = args.pinyinFile, 
+    #     rsltCharFileIn = args.conversionRsltFile,
+    #     goldenCharFileIn = args.charFile,
+    #     logFileOut = args.logFile)
     # PrintModelParaNum(thePy2CharBert.model)
     pass
 
